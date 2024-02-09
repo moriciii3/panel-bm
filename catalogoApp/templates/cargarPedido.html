@@ -1,0 +1,130 @@
+{% extends 'layouts/basePanel.html' %}
+{% block content %}
+
+<center><h3>Cargar Pedido</h3></center>
+<h3>{{respuesta}}</h3>
+<form action="" method="POST" autocomplete="off" class="formularioPanel">
+    {% csrf_token %}
+
+    <label for="cliente">Elige un cliente:</label>
+    <select name="cliente_id" id="cliente" required>
+            <option value="" selected disabled hidden>--Elige aqui--</option>
+            {% for cliente in clientes %}
+                {% with id=cliente.0 nombre=cliente.1 direccion=cliente.2 %}
+                    <option value="{{id}}">{{nombre}} - {{direccion}}</option>
+                {% endwith %}
+            {% endfor %}
+    </select>
+
+    <br>
+
+    <label for="cantidadProductos">Cantidad de productos distintos:</label>
+    <input type="number" max="99" min="1" name="cantidadProductos" id="cantidadProductos">
+
+    <br>
+
+    <div class="productosDesplegable" id="productosDesplegable">
+    </div>
+
+    <br>
+
+    <label for="dia">Dia</label>
+    <input type="date" id="dia" name="dia">
+
+    <label for="hora">Hora</label>
+    <select name="hora" id="hora" required>
+        <option value="" selected disabled hidden>--Elige aqui--</option>
+        <option value="9">09:00</option>
+        <option value="10">10:00</option>
+        <option value="11">11:00</option>
+        <option value="12">12:00</option>
+        <option value="13">13:00</option>
+        <option value="14">14:00</option>
+        <option value="15">15:00</option>
+        <option value="16">16:00</option>
+        <option value="17">17:00</option>
+        <option value="18">18:00</option>
+        <option value="19">19:00</option>
+        <option value="20">20:00</option>
+    </select>
+
+    <br>
+    
+    <label for="precio">Precio</label>
+    <input type="number" name="precio" id="precio">
+
+    <br>
+
+    <label for="extra">Datos adicionales</label>
+    <input type="text" placeholder="Escribe aqui" name="extra" id="extra">
+
+    <br>
+
+    <input type="submit" value="Crear pedido">
+</form>
+
+
+
+<script>
+    // Integración del nuevo script para generar campos de entrada dinámicamente
+
+    document.addEventListener('DOMContentLoaded', function() {
+
+        var cantidadProductosInput = document.getElementById('cantidadProductos'),
+            productosContainer = document.getElementById('productosDesplegable');
+
+        cantidadProductosInput.addEventListener('input', function() { // Al soltar el input se ejecuta
+
+            var cantidadProductos = parseInt(cantidadProductosInput.value);
+
+            // Limpiar el contenedor antes de generar nuevos campos, da igual mantener los input, los borra todos
+            productosContainer.innerHTML = '';
+
+            // Generar campos de selección para cada producto
+            for (var i = 0; i < cantidadProductos; i++) {
+
+                var k = i+1;
+                var n = k.toString();
+
+                var productoSelect = document.createElement('select');
+                productoSelect.setAttribute('name', 'producto'+n);
+                productoSelect.setAttribute('required', 'required');
+
+                var optionDefault = document.createElement('option');
+                optionDefault.setAttribute('value', '');
+                optionDefault.setAttribute('selected', 'selected');
+                optionDefault.setAttribute('disabled', 'disabled');
+                optionDefault.setAttribute('hidden', 'hidden');
+                optionDefault.textContent = '--Elige aqui--';
+                productoSelect.appendChild(optionDefault);
+
+                // Agregar opciones para cada producto
+
+                {% for producto in productos %}
+                    {% with id=producto.0 nombreProducto=producto.1 stock=producto.2 %}
+                        var optionProducto = document.createElement('option');
+                        optionProducto.setAttribute('value', '{{id}}');
+                        optionProducto.textContent = '{{nombreProducto}} ,quedan: {{stock}}';
+
+                        productoSelect.appendChild(optionProducto);
+                    {% endwith %}
+                {% endfor %}
+
+                var cantidadInput = document.createElement('input');
+                cantidadInput.setAttribute('type', 'number');
+                cantidadInput.setAttribute('name', 'cantidad'+n);
+                cantidadInput.setAttribute('placeholder', 'Cantidad');
+
+                var container = document.createElement('div');
+                container.classList.add('producto-container');
+                container.appendChild(productoSelect);
+                container.appendChild(cantidadInput);
+
+                productosContainer.appendChild(container);
+            }
+        });
+    });
+</script>
+
+
+{% endblock %}

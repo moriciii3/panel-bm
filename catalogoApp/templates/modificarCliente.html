@@ -1,0 +1,39 @@
+{% extends 'layouts/basePanel.html' %}
+{% block content %}
+
+<h1>Modificar cliente</h1>
+<a href="{% url 'cargarCliente' %}">Volver sin modificar</a>
+<h3>{{respuesta}}</h3>
+<form action="" method="POST" autocomplete="off" class="formularioPanel">
+    {% csrf_token %}
+    {% with id=datosModificar.0 nombre=datosModificar.1 direccion=datosModificar.2 comuna=datosModificar.3 telefono=datosModificar.4 cantidadPedidos=datosModificar.5 deuda=datosModificar.6 extra=datosModificar.7 %}
+        <input type="hidden" name="id" value="{{id}}">
+        <p>Nombre: {{nombre}}</p>
+        <label for="nombreModificado">Nuevo nombre</label>
+        <input type="text" name="nombreModificado" id="nombreModificado">
+        <br>
+        <p>Direccion: {{direccion}}</p>
+        <label for="direccionModificada">Nueva direccion</label>
+        <input type="text" name="direccionModificada" id="direccionModificada">
+        <br>
+        <p>Comuna: {{comuna}}</p>
+        <label for="comunaModificada">Nueva comuna</label>
+        <input type="text" name="comunaModificada" id="comunaModificada">
+        <br>
+        <p>Telefono: +56 {{telefono}}</p>
+        <label for="telefonoModificado">Nuevo telefono</label>
+        <input type="number" name="telefonoModificado" id="telefonoModificado">
+        <br>
+        <p>Cantidad de pedidos: {{cantidadPedidos}}</p>
+        <label for="cantidadPedidosModificada">Nueva cantidad</label>
+        <input type="number" name="cantidadPedidosModificada" id="cantidadPedidosModificada">
+        <br>
+        <p>Extra: {{extra}}</p>
+        <label for="extraModificado">Nuevo dato extra</label>
+        <input type="text" name="extraModificado" id="extraModificado">
+        <br>
+        <input type="submit" value="Modificar cliente">
+    {% endwith %}
+</form>
+
+{% endblock %}

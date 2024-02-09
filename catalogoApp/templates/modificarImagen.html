@@ -1,0 +1,15 @@
+{% extends 'layouts/basePanel.html' %}
+{% block content %}
+
+<center><h3>Modificar imagen</h3></center>
+<h3>{{respuesta}}</h3>
+
+<img width="200px" src="{{imagen_modificar.imagen.url}}" alt="Imagen">
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="hidden" name="id" value="{{imagen_modificar.id}}">
+    <input type="file" name="imagen" required>
+    <input type="submit" value="Modificar">
+</form>
+
+{% endblock %}

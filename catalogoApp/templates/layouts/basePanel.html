@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'stylesPanel.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'normalize.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'glide.theme.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'glide.core.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <title>Panel Administrativo | Buena Milanesa</title>
+</head>
+<body>
+    <header class="header">
+        <a class="boton" id="btn-nav-desplegar">+</a>
+        <a class="boton" id="btn-nav-cerrar">x</a>
+        <p>{{userName}}</p>
+        <a href="{% url 'logout' %}">Cerrar sesión</a>
+    </header>
+    <hr>
+    <main class="main">
+        <nav class="barraLateral" id="barraLateral">
+            <ul>
+                <li><a href="{% url 'cargarPedido' %}">Nuevo pedido</a></li>
+                <li><a href="{% url 'calendarioPedidos' %}">Pedidos</a></li>
+                <li><a href="{% url 'cargarCliente' %}">Clientes</a></li>
+                <li><a href="{% url 'cargarStock' %}">Stock</a></li>
+                <li><a href="{% url 'gestionCatalogo' %}">Gestionar catálogo</a></li>
+            </ul>
+        </nav>
+        <div class="principal">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main> 
+    <script src="{% static 'main.js' %}"></script>
+    <script src="{% static 'main2.js' %}"></script>
+    <script>
+        function confirmarEliminacion() {
+            // Preguntamos al usuario si está seguro de eliminar el pedido
+            var confirmacion = confirm("¿Estás seguro de que deseas eliminar este registro?");
+    
+            // Si el usuario confirma, devolvemos true para permitir el envío del formulario
+            // Si el usuario cancela, devolvemos false para detener el envío del formulario
+            return confirmacion;
+        }
+    </script>  
+</body>
+</html>

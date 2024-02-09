@@ -1,0 +1,27 @@
+{% extends 'layouts/basePanel.html' %}
+{% block content %}
+
+<h1>Modificar producto</h1>
+<a href="{% url 'cargarStock' %}">Volver sin modificar</a>
+<h3>{{respuesta}}</h3>
+<form action="" method="POST" autocomplete="off" class="formularioPanel">
+    {% csrf_token %}
+    {% with id=datosModificar.0 nombreProducto=datosModificar.1 identificador=datosModificar.2 stock=datosModificar.3 %}
+        <input type="hidden" name="id" value="{{id}}">
+        <p>Nombre producto: {{nombreProducto}}</p>
+        <label for="nombreModificado">Nuevo nombre</label>
+        <input type="text" name="nombreModificado" id="nombreModificado">
+        <br>
+        <p>Identificador: {{identificador}}</p>
+        <label for="identificadorModificado">Nueva identificador</label>
+        <input type="text" name="identificadorModificado" id="identificadorModificado">
+        <br>
+        <p>Stock: {{stock}}</p>
+        <label for="stockModificado">Nuevo stock</label>
+        <input type="number" name="stockModificado" id="stockModificado">
+        <br>
+        <input type="submit" value="Modificar producto">
+    {% endwith %}
+</form>
+
+{% endblock %}

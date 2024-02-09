@@ -1,0 +1,13 @@
+{% extends 'layouts/baseLogin.html' %}
+{% block content %}
+
+<h1>Register</h1>
+<form action="" method="POST" autocomplete="off">
+    {% csrf_token %}
+    <input type="text" name="userName" id="" placeholder="Username" required>
+    <input type="password" name="password" id="" placeholder="Contraseña" required>
+    <input type="submit" value="Crear">
+</form>
+<a href="{% url 'login' %}">Login</a>
+
+{% endblock %}

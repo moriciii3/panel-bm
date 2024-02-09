@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es-CL">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'normalize.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'glide.theme.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'glide.core.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css">
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <title>Catálogo | Buena Milanesa</title>
+    <script src="{% static 'glide.min.js' %}" charset="UTF-8"></script>
+    <script src="node_modules/@glidejs/glide/dist/glide.min.js"></script>
+</head>
+<body>
+    <header>
+        <center><img src="{% static 'logoPNG.png' %}" alt=""></center>
+    </header>
+    <main class="mainDiv">
+        <div class="glide">
+            <div class="glide__track" data-glide-el="track">
+                <ul class="glide__slides">
+                    {% for imagen in imagenes %}
+                    <li class="glide__slide">
+                        <img src="{{imagen.imagen.url}}" alt="Imagen">
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="glide__arrows" data-glide-el="controls">
+                <button class="glide__arrow glide__arrow--left" data-glide-dir="<"><i class="fas fa-arrow-left"></i></button>
+                <button class="glide__arrow glide__arrow--right" data-glide-dir=">"><i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </main>
+    <a href="https://wa.me/+56987095987?text=¡Hola!%20Quiero%20hacer%20un%20pedido%20en%20Buena%20Milanesa.%20¿Qué%20pasos%20debo%20seguir%3F" target="_blank" class="contacto">
+        <p>¡Pide aquí!</p>
+        <div class="logoWpp"><i class="fa-brands fa-whatsapp"></i></div>
+    </a>
+    <script>
+        new Glide(".glide",{
+            type: 'carousel',
+            perView: 3,
+            focusAt: 'center',
+            gap: 30,
+            breakpoints: {
+                1200:{
+                    perView: 3
+                },
+                800:{
+                    perView: 1
+                },
+                
+            }
+        }).mount();
+    </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% extends 'layouts/basePanel.html' %}
+{% block content %}
+
+<h3>{{respuesta}}</h3>
+
+<a class="boton" id="btn-desplegar">Nuevo cliente </a>
+<a class="boton" id="btn-cerrar">Cerrar formulario </a>
+
+<form action="" method="POST" autocomplete="off" id="formularioClientes" class="formularioPanel">
+    {% csrf_token %}
+    <label for="nombre">Nombre</label>
+    <input type="text" name="nombre" id="nombre" placeholder="Nombre completo" required>
+    <br>
+    <label for="direccion">Direccion</label>
+    <input type="text" name="direccion" id="direccion" placeholder="Direccion" required>
+    <br>
+    <label for="comuna">Comuna</label>
+    <input type="text" name="comuna" id="comuna" placeholder="Comuna" required>
+    <br>
+    <label for="telefono">Telefono</label>
+    <input type="number" name="telefono" id="telefono" placeholder="(Formato: X XXXX XXXX)" required>
+    <br>
+    <label for="extra">Datos adicionales</label>
+    <input type="text" placeholder="Escribe aqui" name="extra" id="extra">
+    <br>
+    <input type="submit" value="Crear cliente">
+</form>
+<div class="listado">
+    <table class="tabla">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Direccion</th>
+            <th>Comuna</th>
+            <th>Telefono</th>
+            <th>Cantidad de pedidos</th>
+            <th>Deuda</th>
+            <th>Extra</th>
+            <th>Modificar</th>
+            <th>Eliminar</th>
+        </tr>
+        {% for cliente in clientes %}
+            <tr>
+                {% with id=cliente.0 nombre=cliente.1 direccion=cliente.2 comuna=cliente.3 telefono=cliente.4 cantidadPedidos=cliente.5 deuda=cliente.6 extra=cliente.7 %}
+                    <td>{{id}}</td>
+                    <td>{{nombre}}</td>
+                    <td>{{direccion}}</td>
+                    <td>{{comuna}}</td>
+                    <td>{{telefono}}</td>
+                    <td>{{cantidadPedidos}}</td>
+                    {% if deuda == 'NO DEBE' %}
+                    <td class="verde">{{deuda}}</td>
+                    {% endif %}
+                    {% if deuda == 'DEBE' %}
+                    <td class="rojo">{{deuda}}</td>
+                    {% endif %}
+                    <td>{{extra}}</td>
+                    <td>
+                        <form action="{% url 'modificarCliente' %}" method="GET">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{id}}">
+                            <input type="submit" value="Modificar">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{% url 'eliminarCliente' %}" method="POST" onsubmit="return confirmarEliminacion()">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{id}}">
+                            <input type="submit" value="Eliminar">
+                        </form>
+                    </td>
+                {% endwith %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

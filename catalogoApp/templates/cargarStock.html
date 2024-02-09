@@ -1,0 +1,64 @@
+{% extends 'layouts/basePanel.html' %}
+{% block content %}
+
+<h3>{{respuesta}}</h3>
+
+<a class="boton" id="btn-desplegar">Nuevo producto </a>
+<a class="boton" id="btn-cerrar">Cerrar formulario </a>
+
+<form action="" method="POST" autocomplete="off" id="formularioClientes" class="formularioPanel">
+    {% csrf_token %}
+    <label for="nombreProducto">Nombre del producto</label>
+    <input type="text" name="nombreProducto" id="nombreProducto" placeholder="" required>
+    <br>
+    <label for="identificador">Identificador</label>
+    <input type="text" name="identificador" id="identificador" placeholder="(Ej: Empanada Pollo = e.pollo)" required>
+    <br>
+    <label for="stockInicial">Stock de inicio</label>
+    <input type="number" name="stockInicial" id="stockInicial" required>
+    <br>
+    <input type="submit" value="Crear producto">
+</form>
+<div class="listado">
+    <table class="tabla">
+        <tr>
+            <th>Id</th>
+            <th>Producto</th>
+            <th>Identificador</th>
+            <th>Stock actual</th>
+            <th>Modificar producto</th>
+            <th>Eliminar producto</th>
+        </tr>
+        {% for producto in productos %}
+            <tr>
+                {% with id=producto.0 nombreProducto=producto.1 identificador=producto.2 stock=producto.3 %}
+                    <td>{{id}}</td>
+                    <td>{{nombreProducto}}</td>
+                    <td>{{identificador}}</td>
+                    {% if stock <= 3 %}
+                    <td class="rojo">{{stock}}</td>
+                    {% endif %}
+                    {% if stock > 3 %}
+                    <td class="verde">{{stock}}</td>
+                    {% endif %}
+                    <td>
+                        <form action="{% url 'modificarProducto' %}" method="GET">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{id}}">
+                            <input type="submit" value="Modificar">
+                        </form>
+                    </td>
+                    <td>
+                        <form action="{% url 'eliminarProducto' %}" method="POST" onsubmit="return confirmarEliminacion()">
+                            {% csrf_token %}
+                            <input type="hidden" name="id" value="{{id}}">
+                            <input type="submit" value="Eliminar">
+                        </form>
+                    </td>
+                {% endwith %}
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+
+{% endblock %}

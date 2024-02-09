@@ -1,0 +1,38 @@
+{% extends 'layouts/basePanel.html' %}
+{% block content %}
+
+<center><h3>Gestión catálogo</h3></center>
+<h3>{{respuesta}}</h3>
+
+<a class="boton" id="btn-desplegar">Nueva imagen </a>
+<a class="boton" id="btn-cerrar">Cerrar formulario </a>
+
+<form action="" method="POST" autocomplete="off" id="formularioClientes" class="formularioPanel" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label for="nombre">Subir imagen</label>
+    <input type="file" name="imagen" required>
+    <br>
+    <input type="submit" value="Agregar imagen">
+</form>
+
+<ul class="listaImagenes">
+    {% for imagen in imagenes %}
+    <li>
+        <center>
+        <img width="200px" src="{{imagen.imagen.url}}" alt="Imagen">
+        <p>{{imagen.imagen.url}}</p>
+        <form action="{% url 'modificarImagen' %}" method="GET">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{imagen.id}}">
+            <input type="submit" value="Modificar">
+        </form>
+        <form action="{% url 'eliminarImagen' %}" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="id" value="{{imagen.id}}">
+            <input type="submit" value="Eliminar">
+        </form>
+        </center>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

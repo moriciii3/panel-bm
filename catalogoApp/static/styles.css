@@ -1,0 +1,141 @@
+/* Variables de inicio */
+:root{
+    --fondoNuevo: #373232;
+    --claroNuevo: #e0d1b1;
+    --fondoViejo: #010909;
+    --claroViejo: #a68868;
+    --fondo: #252424;
+    --claro: #c3ad8d;
+}
+/* Logo viejo: Montserrat Classic 22
+Logo nuevo: Montserrat 65,5 */
+html{
+    font-family: 'Montserrat';
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--fondo);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.glide{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.glide__slide img{
+    width: 100%;
+}
+
+.glide__slide{
+    filter: blur(2px);
+    opacity: .7;
+    transition: .3s linear;
+}
+
+.glide__slide--active{
+    filter: none;
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.glide__slides{
+    overflow: visible;
+}
+
+.contacto{
+    padding: 10px;
+    border: 5px solid #fff;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: fixed;
+    bottom: 3%;
+    right: 3%;
+    color: #fff;
+}
+.contacto:hover{
+    background-color: #dedede;
+    color: #000;
+    border-radius: 10px;
+}
+.contacto p{
+    margin: 0 10px 0 0;
+    font-size: 25px;
+}
+
+.logoWpp{
+    color: #25d366 !important;
+    margin: 0;
+    font-size: 35px !important;
+}
+
+.mainDiv{
+    width: 90%;
+    margin: 0;
+    padding: 0;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+}
+header img{
+    width: 160px;
+}
+.glide__slide{
+    width: 800px;
+}
+.glide__slide img{
+    width: 80%;
+}
+
+.glide__slides{
+    height: 70vh;
+}
+.glide__slide{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.glide__slide--active img{
+    width: 100%;
+}
+
+.glide{
+    width: 95%;
+}
+
+@media screen and ( max-width: 450px ){
+
+    .glide{
+        position: absolute !important;
+        top: 10% !important;
+    }
+    
+}
+
+@media screen and ( max-width: 680px ){
+    .glide__slides, .mainDiv{
+        height: 85vh;
+    }
+    
+}
