@@ -143,10 +143,10 @@ if not DEBUG:    # Tell Django to copy statics to the `staticfiles` directory
 
     # Idea por si tira warning
 
-    STATIC_URL = 'static/'
-    STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'catalogoApp', 'static'),
-    )
+    # STATIC_URL = 'static/'
+    # STATICFILES_DIRS = (
+    #     os.path.join(BASE_DIR, 'catalogoApp', 'static'),
+    # )
     
     # Turn on WhiteNoise storage backend that takes care of compressing static files
     # and creating unique names for each version so they can safely be cached forever.

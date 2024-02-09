@@ -1,0 +1,167 @@
+:root{
+    --fondoNuevo: #373232;
+    --claroNuevo: #e0d1b1;
+    --fondoViejo: #010909;
+    --claroViejo: #a68868;
+    --fondo: #252424;
+    --claro: #c3ad8d;
+}
+/* Logo viejo: Montserrat Classic 22
+Logo nuevo: Montserrat 65,5 */
+html{
+    font-family: 'Montserrat';
+    color: #fff;
+}
+body{
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: var(--fondoNuevo);
+}
+
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: var(--fondo);
+}
+
+hr{
+    margin: 0;
+    padding: 0;
+}
+
+.main{
+    display: flex;
+    flex-direction: row;
+}
+
+nav{
+    position: fixed;
+    width: 10%;
+    background-color: #c3ad8d;
+}
+
+.principal{
+    width: 90%;
+    padding: 5px;
+    margin-left: 10%;
+    background-color: var(--fondo);
+    height: 100%;
+    overflow: scroll;
+}
+
+nav ul{
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 20px;
+    height: 93vh;
+    background-color: var(--fondoNuevo);
+}
+
+nav ul li{
+    padding: 0;
+    margin: 0;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+}
+
+nav ul li a{
+    margin: auto;
+    color: #fff;
+}
+
+.formularioPanel{
+    margin: auto;
+    width: 40%;
+}
+.boton{
+    padding: 5px;
+    margin: 10px;
+    display: block;
+    position: relative;
+    width: 20%;
+    border-radius: 3px;
+    border: 2px solid #fff;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+}
+.boton:hover{
+    color: var(--fondo);
+    background-color: #fff;
+}
+.formularioPanel input, .formularioPanel label{
+    margin: 10px 0 10px 0;
+}
+
+#btn-cerrar, #formularioClientes{
+    display: none;
+}
+
+
+.tabla, .tabla td, .tabla th{
+    border: 1px solid #fff;
+}
+
+.tabla{
+    text-align: center;
+    width: 100%;
+}
+
+.tabla td{
+    padding: 3px;
+}
+
+.rojo{
+    color: #ff0000;
+}
+.verde{
+    color: #11ff00;
+}
+
+.barraLateral{
+    z-index: 2;
+}
+
+.listaImagenes{
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 10;
+    justify-content: space-between;
+}
+
+/* Responsive */
+
+#btn-nav-desplegar, #btn-nav-cerrar{
+    display: none;
+}
+
+@media screen and ( max-width: 800px ){
+    body{
+        font-size: 12px;
+    }
+    .barraLateral{
+        display: none;
+    }
+    #btn-nav-desplegar{
+        display: block;
+    }
+    .principal{
+        width: 100%;
+        margin: 0;
+    }
+    .formularioPanel{
+        width: 90%;
+    }
+}
