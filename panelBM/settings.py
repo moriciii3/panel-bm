@@ -15,7 +15,12 @@ import os
 import dj_database_url
 import environ
 
-env = environ.Env()
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -97,8 +102,12 @@ WSGI_APPLICATION = 'panelBM.wsgi.application'
 # }
 
 DATABASES = {
-    'default': env.db(),  # Esto leerá automáticamente la variable de entorno DATABASE_URL
+    # read os.environ['DATABASE_URL'] and raises ImproperlyConfigured exception if not found
+    'default': env.db(),
+    # read os.environ['SQLITE_URL']
+    'extra': env.db('SQLITE_URL', default='sqlite:////tmp/my-tmp-sqlite.db')
 }
+
 
 
 # Password validation
