@@ -93,6 +93,17 @@ WSGI_APPLICATION = 'panelBM.wsgi.application'
 #     }
 # }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'railway',
+        'USER': 'root',
+        'PASSWORD': 'BbFB-cfE2aa1-fHgFFGdcEg2eBC2EABC',
+        'HOST': 'roundhouse.proxy.rlwy.net',
+        'PORT': '57640',
+    }
+}
+
 #da
 
 # Password validation
