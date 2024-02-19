@@ -269,8 +269,6 @@ def cargarStock(request):
             identificador = request.POST['identificador'].lower().strip()
             stockInicial = request.POST['stockInicial']
 
-            print(identificador)
-
             lista_similares = Productos.objects.filter(identificador=identificador)
 
             if len(lista_similares) != 0:
@@ -519,7 +517,6 @@ def calendarioPedidos(request):
 
             pedidos.append(x)
 
-            print(informacion_formateada)
             print('\n')
 
         return render(request, 'calendarioPedidos.html',{
@@ -607,7 +604,7 @@ def enviarDespacho(request):
         else:
             
             # Credenciales de Twilio
-            auth_token = 'afaf42eaf97f0d90022d58551f903845'
+            auth_token = '397e80faf046d3c7b1de2b0febe262f8'
             account_sid = 'AC34c7c220577f11411ccd59c969e3a539'
             client = Client(account_sid, auth_token)
 
