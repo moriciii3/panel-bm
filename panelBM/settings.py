@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-# SECRET_KEY = 'django-insecure-z73(cg@o5d0-8+$yz&=sn!sz8-z9))foq4#k4al6z^g&uhj8*p'
+SECRET_KEY = 'django-insecure-z73(cg@o5d0-8+$yz&=sn!sz8-z9))foq4#k4al6z^g&uhj8*p'
 
-SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
+# SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -86,21 +86,10 @@ WSGI_APPLICATION = 'panelBM.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'railway',
-        'USER': 'root',
-        'PASSWORD': 'BbFB-cfE2aa1-fHgFFGdcEg2eBC2EABC',
-        'HOST': 'roundhouse.proxy.rlwy.net',
-        'PORT': '57640',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
